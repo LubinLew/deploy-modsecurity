@@ -93,16 +93,26 @@ CRSVER=3.3.0
 
 mkdir -p /etc/nginx/modsecurity
 
+# download crs rules
 cd /etc/nginx/modsecurity
 wget https://github.com/coreruleset/coreruleset/archive/v${CRSVER}.tar.gz
 tar xf v${CRSVER}.tar.gz
+
+# crs config
+cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
+  SecDefaultAction "phase:1,log,auditlog,deny,status:403"
+  SecDefaultAction "phase:2,log,auditlog,deny,status:403"
+EOF
+
+# modsecurity config
 cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
   SecRuleEngine On
-  SecDebugLog /tmp/modsec_debug.log
+  SecDebugLog /var/log/modsec_debug.log
   SecDebugLogLevel 9
   SecRuleRemoveById 10
+  Include /etc/nginx/modsecurity/crs-setup.conf
+  Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf
 EOF
-cd ..
 
 ## nginx conf(listen 8080)
 cat > /etc/nginx/conf.d/modsecurity.conf <<EOF
@@ -116,8 +126,9 @@ server {
 }
 EOF
 systemctl restart nginx
+cd ..
 
-curl -I http://localhost:8080/
+curl -I "http://localhost:8080/?id=<script>alert('xss')</script>"
 ```
 
 
