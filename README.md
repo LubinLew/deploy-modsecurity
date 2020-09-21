@@ -65,7 +65,7 @@ MAXMINDDIR=${ROOT}/libmaxminddb-${GEOVER}/install
 make install
 cd ..
 
-# build modsecurity v3
+## build modsecurity v3
 wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsecurity-${MSVER}.tar.gz
 tar xf modsecurity-${MSVER}.tar.gz
 cd modsecurity-${MSVER}
@@ -74,7 +74,7 @@ make
 make install
 cd ..
 
-# build connector
+## build connector
 wget https://github.com/SpiderLabs/ModSecurity-nginx/releases/download/v1.0.1/modsecurity-nginx-v${MNVER}.tar.gz
 tar xf modsecurity-nginx-v${MNVER}.tar.gz
 wget http://nginx.org/download/nginx-${NGXVER}.tar.gz
@@ -89,14 +89,19 @@ cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
 ```bash
 #!/usr/bin/bash
 
+##################################################################################################
+
+# coreruleset verson
 CRSVER=3.3.0
 
 mkdir -p /etc/nginx/modsecurity
+##################################################################################################
 
 # download crs rules
 cd /etc/nginx/modsecurity
 wget https://github.com/coreruleset/coreruleset/archive/v${CRSVER}.tar.gz
 tar xf v${CRSVER}.tar.gz
+cd ..
 
 # crs config
 cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
@@ -114,7 +119,7 @@ cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
   Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf
 EOF
 
-## nginx conf(listen 8080)
+# nginx conf(listen 8080)
 cat > /etc/nginx/conf.d/modsecurity.conf <<EOF
 server {
     listen [::]:8080 default_server;
@@ -125,9 +130,11 @@ server {
     }
 }
 EOF
-systemctl restart nginx
-cd ..
 
+# restart nginx service
+systemctl restart nginx
+##################################################################################################
+# test
 curl -I "http://localhost:8080/?id=<script>alert('xss')</script>"
 ```
 
