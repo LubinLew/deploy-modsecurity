@@ -22,6 +22,7 @@ yum install -y libxml2-devel pcre-devel libcurl-devel libevent-devel ncurses-dev
 
 PWD=`pwd`
 mkdir build
+cd build
 ROOT=${PWD}/build
 ##################################################################################################
 
