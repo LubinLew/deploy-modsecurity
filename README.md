@@ -21,10 +21,9 @@ yum install -y wget git automake autoconf libtool gcc-c++
 yum install -y libxml2-devel pcre-devel libcurl-devel libevent-devel ncurses-devel readline-devel \
                yajl-devel lmdb-devel ssdeep-devel libtermcap-devel 
 
-PWD=`pwd`
 mkdir build
 cd build
-ROOT=${PWD}/build
+ROOT=${PWD}
 echo "BUILD PATH ${ROOT}"
 ##################################################################################################
 
