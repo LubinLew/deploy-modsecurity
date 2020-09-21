@@ -51,6 +51,7 @@ wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsec
 tar xf modsecurity-${MSVER}.tar.gz
 cd modsecurity-${MSVER}
 ./configure --with-lua=${LUADIR} --with-maxmind=${MAXMINDDIR}
+make
 ```
 
 ## Deploy
