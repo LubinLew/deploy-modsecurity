@@ -105,7 +105,7 @@ EOF
 cd ..
 
 ## nginx conf(listen 8080)
-cat > /etc/nginx/conf.d/modsecurity.repo <<EOF
+cat > /etc/nginx/conf.d/modsecurity.conf <<EOF
 server {
     listen [::]:8080 default_server;
     modsecurity on;
