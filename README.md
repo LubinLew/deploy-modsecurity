@@ -47,7 +47,7 @@ cd ..
 wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsecurity-${MSVER}.tar.gz
 tar xf modsecurity-${MSVER}.tar.gz
 cd modsecurity-${MSVER}
-./configure --with-lua=${LUADIR}
+./configure --with-lua=${LUADIR} --with-maxmind=${MAXMINDDIR}
 ```
 
 ## Deploy
@@ -55,5 +55,5 @@ cd modsecurity-${MSVER}
 
 
 ## See Also
-[lua](https://github.com/lua/lua)
-[libmaxminddb](https://github.com/maxmind/libmaxminddb)
+- [lua](https://github.com/lua/lua)
+- [libmaxminddb](https://github.com/maxmind/libmaxminddb)
