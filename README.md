@@ -27,6 +27,7 @@ cd ..
 wget https://github.com/maxmind/libmaxminddb/releases/download/${GEOVER}/libmaxminddb-${GEOVER}.tar.gz
 tar xf libmaxminddb-${GEOVER}.tar.gz
 cd libmaxminddb-${GEOVER}
+./configure --prefix=/usr/local --libdir=/usr/local/lib64
 make install
 cd ..
 
