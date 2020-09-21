@@ -144,3 +144,4 @@ curl -I "http://localhost:8080/?id=<script>alert('xss')</script>"
 - [lua](https://github.com/lua/lua)
 - [libmaxminddb](https://github.com/maxmind/libmaxminddb)
 - [ModSecurity](https://github.com/SpiderLabs/ModSecurity)
+- [ModSecurity-nginx](https://github.com/SpiderLabs/ModSecurity-nginx)
