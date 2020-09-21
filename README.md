@@ -8,7 +8,7 @@ MSVER=v3.0.4
 # libmaxmind version
 GEOVER=1.4.3
 
-# lua version,v5.4.0 will cause modsecurity compile error
+# lua version,Modsecurity v3 only support Lua5.3(not support Lua5.4)
 LUAVER=5.3.5
 
 ##################################################################################################
@@ -34,7 +34,7 @@ make local
 LUADIR=${ROOT}/lua-${LUAVER}/install
 cd ..
 
-## build libmaxmind
+## build libmaxmind(local static library)
 wget https://github.com/maxmind/libmaxminddb/releases/download/${GEOVER}/libmaxminddb-${GEOVER}.tar.gz
 tar xf libmaxminddb-${GEOVER}.tar.gz
 cd libmaxminddb-${GEOVER}
