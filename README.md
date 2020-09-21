@@ -1,5 +1,6 @@
 # Deploy Modsecurity v3 on CentOS 7
 
+## Compile
 ```bash
 # modesecurity version
 MSVER=v3.0.4
@@ -35,3 +36,5 @@ wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsec
 tar xf modsecurity-${MSVER}.tar.gz
 cd modsecurity-${MSVER}
 ```
+
+## Deploy
