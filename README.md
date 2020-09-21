@@ -2,6 +2,7 @@
 
 ## Compile
 ```bash
+#!/usr/bin/bash
 # modesecurity version
 MSVER=v3.0.4
 
