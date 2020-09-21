@@ -89,8 +89,35 @@ cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
 ```bash
 #!/usr/bin/bash
 
+CRSVER=3.3.0
 
+mkdir -p /etc/nginx/modsecurity
 
+cd /etc/nginx/modsecurity
+wget https://github.com/coreruleset/coreruleset/archive/v${CRSVER}.tar.gz
+tar xf v${CRSVER}.tar.gz
+cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
+  SecRuleEngine On
+  SecDebugLog /tmp/modsec_debug.log
+  SecDebugLogLevel 9
+  SecRuleRemoveById 10
+EOF
+cd ..
+
+## nginx conf(listen 8080)
+cat > /etc/nginx/conf.d/modsecurity.repo <<EOF
+server {
+    listen [::]:8080 default_server;
+    modsecurity on;
+    location / {
+        root /usr/share/nginx/html;
+        modsecurity_rules_file /etc/nginx/modsecurity/modsecurity_rules.conf;
+    }
+}
+EOF
+systemctl restart nginx
+
+curl -I http://localhost:8080/
 ```
 
 
