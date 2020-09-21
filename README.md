@@ -44,6 +44,7 @@ MAXMINDDIR=${ROOT}/libmaxminddb-${GEOVER}/install
 make install
 cd ..
 
+# build modsecurity v3
 wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsecurity-${MSVER}.tar.gz
 tar xf modsecurity-${MSVER}.tar.gz
 cd modsecurity-${MSVER}
