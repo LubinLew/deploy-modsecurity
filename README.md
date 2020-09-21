@@ -115,6 +115,8 @@ cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
 EOF
 
 ## modsecurity config
+echo "Include /etc/nginx/modsecurity/crs-setup.conf" >> /etc/nginx/modsecurity/modsecurity.conf
+echo "Include /etc/nginx/modsecurity/coreruleset-3.3.0/rules/*.conf" >> /etc/nginx/modsecurity/modsecurity.conf
 
 ## nginx conf(listen 8080)
 # load module
