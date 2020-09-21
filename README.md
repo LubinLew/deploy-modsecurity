@@ -25,6 +25,7 @@ PWD=`pwd`
 mkdir build
 cd build
 ROOT=${PWD}/build
+echo "BUILD PATH ${ROOT}"
 ##################################################################################################
 
 ## build Lua(local static library)
