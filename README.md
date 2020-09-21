@@ -18,7 +18,7 @@ LUAVER=5.3.5
 NGXVER=1.18.0
 
 # ModSecurity-nginx version
-MNVER=1.0.1
+MNVER=v1.0.1
 ##################################################################################################
 
 ## install tools
@@ -74,15 +74,17 @@ make
 make install
 cd ..
 
-## build connector
-wget https://github.com/SpiderLabs/ModSecurity-nginx/releases/download/v1.0.1/modsecurity-nginx-v${MNVER}.tar.gz
-tar xf modsecurity-nginx-v${MNVER}.tar.gz
+## build connector (dynamic library)
+wget https://github.com/SpiderLabs/ModSecurity-nginx/releases/download/v1.0.1/modsecurity-nginx-${MNVER}.tar.gz
+tar xf modsecurity-nginx-${MNVER}.tar.gz
 wget http://nginx.org/download/nginx-${NGXVER}.tar.gz
 tar xf nginx-${NGXVER}.tar.gz
 cd nginx-${NGXVER}
-./configure --add-dynamic-module=${ROOT}/modsecurity-nginx-v${MNVER} --with-compat
+./configure --add-dynamic-module=${ROOT}/modsecurity-nginx-${MNVER} --with-compat
 make
 cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
+cd ..
+echo "================= DONE ================="
 ```
 
 ## Deploy
@@ -97,19 +99,19 @@ CRSVER=3.3.0
 mkdir -p /etc/nginx/modsecurity
 ##################################################################################################
 
-# download crs rules
+## download crs rules
 cd /etc/nginx/modsecurity
 wget https://github.com/coreruleset/coreruleset/archive/v${CRSVER}.tar.gz
 tar xf v${CRSVER}.tar.gz
 cd ..
 
-# crs config
+## crs config
 cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
   SecDefaultAction "phase:1,log,auditlog,deny,status:403"
   SecDefaultAction "phase:2,log,auditlog,deny,status:403"
 EOF
 
-# modsecurity config
+## modsecurity config
 cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
   SecRuleEngine On
   SecDebugLog /var/log/modsec_debug.log
@@ -119,7 +121,10 @@ cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
   Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf
 EOF
 
-# nginx conf(listen 8080)
+## nginx conf(listen 8080)
+# load module
+sed -i '8 s/^/load_module modules/ngx_http_modsecurity_module.so;\n/' /etc/nginx/nginx.conf
+# add new server
 cat > /etc/nginx/conf.d/modsecurity.conf <<EOF
 server {
     listen [::]:8080 default_server;
@@ -131,9 +136,10 @@ server {
 }
 EOF
 
-# restart nginx service
+## restart nginx service
 systemctl restart nginx
 ##################################################################################################
+
 # test
 curl -I "http://localhost:8080/?id=<script>alert('xss')</script>"
 ```
