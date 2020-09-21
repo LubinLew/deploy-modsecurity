@@ -42,7 +42,7 @@ tar xf libmaxminddb-${GEOVER}.tar.gz
 cd libmaxminddb-${GEOVER}
 mkdir install
 MAXMINDDIR=${ROOT}/libmaxminddb-${GEOVER}/install
-./configure --prefix=${MAXMINDDIR} --enable-shared=no
+./configure --prefix=${MAXMINDDIR} --with-pic=PIC --enable-shared=no
 make install
 cd ..
 
