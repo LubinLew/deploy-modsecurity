@@ -109,14 +109,11 @@ tar xf v${CRSVER}.tar.gz
 cd ..
 
 ## crs config
-cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
-  SecDefaultAction "phase:1,log,auditlog,deny,status:403"
-  SecDefaultAction "phase:2,log,auditlog,deny,status:403"
-EOF
+cp  /etc/nginx/modsecurity/coreruleset-${CRSVER}/crs-setup.conf.example /etc/nginx/modsecurity/crs-setup.conf
 
 ## modsecurity config
 echo "Include /etc/nginx/modsecurity/crs-setup.conf" >> /etc/nginx/modsecurity/modsecurity.conf
-echo "Include /etc/nginx/modsecurity/coreruleset-3.3.0/rules/*.conf" >> /etc/nginx/modsecurity/modsecurity.conf
+echo "Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf" >> /etc/nginx/modsecurity/modsecurity.conf
 
 ## nginx conf(listen 8080)
 # load module
