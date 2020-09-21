@@ -72,6 +72,10 @@ cd modsecurity-${MSVER}
 ./configure --with-lua=${LUADIR} --with-maxmind=${MAXMINDDIR}
 make
 make install
+# copy conf
+mkdir -p /etc/nginx/modsecurity
+cp modsecurity.conf-recommended /etc/nginx/modsecurity/modsecurity.conf
+cp unicode.mapping /etc/nginx/modsecurity/
 cd ..
 
 ## build connector (dynamic library)
@@ -96,7 +100,6 @@ echo "================= DONE ================="
 # coreruleset verson
 CRSVER=3.3.0
 
-mkdir -p /etc/nginx/modsecurity
 ##################################################################################################
 
 ## download crs rules
@@ -112,7 +115,7 @@ cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
 EOF
 
 ## modsecurity config
-cat > /etc/nginx/modsecurity/modsecurity_rules.conf << EOF
+cat > /etc/nginx/modsecurity/modsecurity.conf << EOF
   SecRuleEngine On
   SecDebugLog /var/log/modsec_debug.log
   SecDebugLogLevel 9
@@ -131,7 +134,7 @@ server {
     modsecurity on;
     location / {
         root /usr/share/nginx/html;
-        modsecurity_rules_file /etc/nginx/modsecurity/modsecurity_rules.conf;
+        modsecurity_rules_file /etc/nginx/modsecurity/modsecurity.conf;
     }
 }
 EOF
