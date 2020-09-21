@@ -115,14 +115,6 @@ cat > /etc/nginx/modsecurity/crs-setup.conf << EOF
 EOF
 
 ## modsecurity config
-cat > /etc/nginx/modsecurity/modsecurity.conf << EOF
-  SecRuleEngine On
-  SecDebugLog /var/log/modsec_debug.log
-  SecDebugLogLevel 9
-  SecRuleRemoveById 10
-  Include /etc/nginx/modsecurity/crs-setup.conf
-  Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf
-EOF
 
 ## nginx conf(listen 8080)
 # load module
