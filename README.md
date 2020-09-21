@@ -3,7 +3,7 @@
 ```bash
 # modesecurity version
 MSVER=v3.0.4
-# lua version
+# lua version,v5.4.0 will cause modsecurity compile error
 LUAVER=5.3.5
 # GeoIP/libmaxmind version
 GEOVER=1.4.3
