@@ -109,10 +109,10 @@ tar xf v${CRSVER}.tar.gz
 cd ..
 
 ## crs config
-cp  /etc/nginx/modsecurity/coreruleset-${CRSVER}/crs-setup.conf.example /etc/nginx/modsecurity/crs-setup.conf
+cp  /etc/nginx/modsecurity/coreruleset-${CRSVER}/crs-setup.conf.example /etc/nginx/modsecurity/coreruleset-${CRSVER}/crs-setup.conf
 
 ## modsecurity config
-echo "Include /etc/nginx/modsecurity/crs-setup.conf" >> /etc/nginx/modsecurity/modsecurity.conf
+echo "Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/crs-setup.conf" >> /etc/nginx/modsecurity/modsecurity.conf
 echo "Include /etc/nginx/modsecurity/coreruleset-${CRSVER}/rules/*.conf" >> /etc/nginx/modsecurity/modsecurity.conf
 
 ## nginx conf(listen 8080)
