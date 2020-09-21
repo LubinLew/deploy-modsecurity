@@ -19,13 +19,16 @@ yum install -y libxml2-devel pcre-devel libcurl-devel libevent-devel ncurses-dev
 curl -R -O http://www.lua.org/ftp/lua-${LUAVER}.tar.gz
 tar zxf lua-${LUAVER}.tar.gz
 cd lua-${LUAVER}
-make all install
+make linux
+make install
+cd ..
 
-## GeoIP/libmaxmind
+## install GeoIP/libmaxmind
 wget https://github.com/maxmind/libmaxminddb/releases/download/${GEOVER}/libmaxminddb-${GEOVER}.tar.gz
 tar xf libmaxminddb-${GEOVER}.tar.gz
 cd libmaxminddb-${GEOVER}
 make install
+cd ..
 
 wget https://github.com/SpiderLabs/ModSecurity/releases/download/${MSVER}/modsecurity-${MSVER}.tar.gz
 tar xf modsecurity-${MSVER}.tar.gz
