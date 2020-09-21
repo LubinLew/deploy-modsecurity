@@ -1,6 +1,11 @@
+# Deploy Modsecurity v3 on CentOS 7
+
 ```bash
+# modesecurity version
 MSVER=v3.0.4
-LUAVER=5.4.0
+# lua version
+LUAVER=5.3.5
+# GeoIP/libmaxmind version
 GEOVER=1.4.3
 
 ## install tools
@@ -15,7 +20,7 @@ tar zxf lua-${LUAVER}.tar.gz
 cd lua-${LUAVER}
 make all install
 
-## GeoIP/maxmind
+## GeoIP/libmaxmind
 wget https://github.com/maxmind/libmaxminddb/releases/download/${GEOVER}/libmaxminddb-${GEOVER}.tar.gz
 tar xf libmaxminddb-${GEOVER}.tar.gz
 cd libmaxminddb-${GEOVER}
