@@ -12,7 +12,8 @@ GEOVER=1.4.3
 yum install -y wget git automake autoconf libtool gcc-c++ 
 
 ## install compile dependencies
-yum install -y libxml2-devel pcre-devel libcurl-devel yajl-devel lmdb-devel ssdeep-devel libtermcap-devel ncurses-devel libevent-devel readline-devel
+yum install -y libxml2-devel pcre-devel libcurl-devel libevent-devel ncurses-devel readline-devel \
+               yajl-devel lmdb-devel ssdeep-devel libtermcap-devel 
 
 ## install Lua
 curl -R -O http://www.lua.org/ftp/lua-${LUAVER}.tar.gz
