@@ -79,7 +79,7 @@ cp unicode.mapping /etc/nginx/modsecurity/
 cd ..
 
 ## build connector (dynamic library)
-wget https://github.com/SpiderLabs/ModSecurity-nginx/releases/download/v1.0.1/modsecurity-nginx-${MNVER}.tar.gz
+wget https://github.com/SpiderLabs/ModSecurity-nginx/releases/download/${MNVER}/modsecurity-nginx-${MNVER}.tar.gz
 tar xf modsecurity-nginx-${MNVER}.tar.gz
 wget http://nginx.org/download/nginx-${NGXVER}.tar.gz
 tar xf nginx-${NGXVER}.tar.gz
