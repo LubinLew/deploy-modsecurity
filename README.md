@@ -6,19 +6,19 @@
 ##################################################################################################
 
 # modesecurity version
-MSVER=v3.0.4
+MSVER=v3.0.5
 
 # libmaxmind version
-GEOVER=1.4.3
+GEOVER=1.6.0
 
-# lua version,Modsecurity v3 only support Lua5.3(not support Lua5.4)
-LUAVER=5.3.5
+# lua version
+LUAVER=5.4.3
 
 # nginx version(stable)
-NGXVER=1.18.0
+NGXVER=1.20.1
 
 # ModSecurity-nginx version
-MNVER=v1.0.1
+MNVER=v1.0.2
 ##################################################################################################
 
 ## install tools
